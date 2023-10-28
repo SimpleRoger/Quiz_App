@@ -12,6 +12,8 @@ const ConnectApi = (url) => {
       try {
         setFetching({ isFetching: true });
         const response = await axios.get(apiurl);
+        setDataState(response)
+        // console.log(response)÷
       } catch (e) {
         setFetching({ ...fetch, isFetching: true });
       }
@@ -20,7 +22,5 @@ const ConnectApi = (url) => {
   }, []);
   return dataState;
 };
-
-useEffect(() => {});
 
 export default ConnectApi;
