@@ -63,7 +63,7 @@ export default function QuizSelect() {
       <Header />
       <Container maxWidth="lg" component="main">
         <Grid container spacing={5} alignItems="stretch">
-          {data.map((q) => {
+          {data.map((q) => (
             <Grid item key={q.title} xs={12} md={4}>
               <Card>
                 <CardHeader
@@ -93,16 +93,17 @@ export default function QuizSelect() {
                     fullWidth
                     variant="outlined"
                     color="primary"
-                    href="http://localhost:3000/r/django"
+                    href={`http://localhost:3000/r/${q.title}`}
                   >
                     Start Quiz
                   </Button>
                 </CardActions>
               </Card>
-            </Grid>;
-          })}
+            </Grid>
+          ))}
         </Grid>
       </Container>
+      {/* {data.map((q) => q.title)} */}
       <Footer />
     </div>
   );

@@ -66,7 +66,7 @@ const footers = [
   },
 ];
 
-export default function Header() {
+export default function Footer() {
   const classes = useStyles();
 
   return (

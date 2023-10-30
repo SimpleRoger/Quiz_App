@@ -1,8 +1,10 @@
 import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: 50,
   },
   toolbarTitle: {
     flexGrow: 1,
@@ -20,13 +22,15 @@ export default function Header() {
         className={classes.AppBar}
       >
         <Toolbar>
-          <Typography
-            varient="h6"
-            color="inherit"
-            className={classes.toolbarTitle}
-          >
-            Valearnis Quizzes
-          </Typography>
+          <Link to="/">
+            <Typography
+              varient="h6"
+              color="inherit"
+              className={classes.toolbarTitle}
+            >
+              Valearnis Quizzes
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
