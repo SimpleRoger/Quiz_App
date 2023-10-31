@@ -38,9 +38,10 @@ export default function RandomQuiz() {
 
   const { topic } = useParams();
   console.log(topic);
+  
   const [singularChoice, setSingularChoice] = useState(false);
 
-  
+
   const API_URL = "https://simpleroger.pythonanywhere.com/quiz/r/" + topic;
 
   console.log(API_URL);
