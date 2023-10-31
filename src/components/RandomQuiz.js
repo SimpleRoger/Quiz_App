@@ -40,6 +40,7 @@ export default function RandomQuiz() {
   console.log(topic);
   const [singularChoice, setSingularChoice] = useState(false);
 
+  
   const API_URL = "https://simpleroger.pythonanywhere.com/quiz/r/" + topic;
 
   console.log(API_URL);
