@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function QuizSelect() {
   const classes = useStyles();
-  const API_URL = "http://127.0.0.1:8000/quiz/";
+  const API_URL = "https://simpleroger.pythonanywhere.com/quiz/";
   const { data } = ConnectApi(API_URL);
   console.log(data);
   console.log("HI");

@@ -34,14 +34,19 @@ function AuthModal() {
   const [password, setPassword] = useState("");
   //check if user is signed in, if it is then open modal if not then don't worry
   const userEmail = useSelector((state) => state.user.email);
-
+  console.log("EMAIL", userEmail);
+  if (userEmail) {
+    dispatch(closeLogInModal());
+  }
   useEffect(() => {
     if (!userEmail) {
       dispatch(openLogInModal());
     }
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) return;
       //handle redux actions
+      console.log("SAVING USER");
       dispatch(
         setUser({
           email: currentUser.email,
@@ -86,7 +91,7 @@ function AuthModal() {
     }
   }
   async function handleTestSignUp() {
-    console.log("HI")
+    console.log("HI");
     setLoading(true);
     const userCredentials = await signInWithEmailAndPassword(
       auth,
@@ -120,7 +125,10 @@ function AuthModal() {
                 <p className="text-red-500 p-0 m-0">{errorMessage}</p>
               )}
             </h2>
-            <div className="bg-[#3a579d] flex items-center cursor-pointer p-1 rounded-md hover:bg-gray-500 transition duration-300 ease-in-out ">
+            <div
+              className="bg-[#3a579d] flex items-center cursor-pointer p-1 rounded-md hover:bg-gray-500 transition duration-300 ease-in-out "
+              onClick={handleTestSignUp}
+            >
               {" "}
               <svg
                 stroke="currentColor"
@@ -134,7 +142,7 @@ function AuthModal() {
               >
                 <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
               </svg>
-              <h3 className="ml-20 text-white " onClick={handleTestSignUp}>
+              <h3 className="ml-20 text-white ">
                 {loading ? (
                   <AiOutlineLoading className="absolute left-1/2 animate-spin" />
                 ) : (
@@ -177,15 +185,6 @@ function AuthModal() {
               )}
             </button>
             <button className="w-[100%]">Forgot your password</button>
-            <button
-              className="w-[100%]"
-              onClick={() => {
-                dispatch(openSignUpModal());
-                dispatch(closeLogInModal());
-              }}
-            >
-              Don't have an account{" "}
-            </button>
           </div>
         </div>
       </Modal>
