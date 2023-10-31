@@ -35,14 +35,14 @@ function AuthModal() {
   //check if user is signed in, if it is then open modal if not then don't worry
   const userEmail = useSelector((state) => state.user.email);
   console.log("EMAIL", userEmail);
-  if (userEmail) {
-    dispatch(closeLogInModal());
-  }
+  // if (userEmail) {
+  //   dispatch(closeLogInModal());
+  // }
+  // useEffect(() => {}, [userEmail])
   useEffect(() => {
     if (!userEmail) {
       dispatch(openLogInModal());
     }
-
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) return;
       //handle redux actions
@@ -52,6 +52,7 @@ function AuthModal() {
           email: currentUser.email,
         })
       );
+      dispatch(closeLogInModal());
     });
 
     return unsubscribe;

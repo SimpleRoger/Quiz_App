@@ -13,11 +13,14 @@ function App() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   return (
-    
     <div>
       <Router>
         <SignInModal isOpen={true} onRequestClose={closeModal} />
         <Routes>
+          {/* <Route
+            path="" // Define the path where you want to display the SignInModal
+            element={<SignInModal isOpen={true} onRequestClose={closeModal} />}
+          /> */}
           <Route path="" exact element={<QuizSelect />} />
           {/* //name params topic */}
           <Route path="/r/:topic" exact element={<RandomQuiz />} />

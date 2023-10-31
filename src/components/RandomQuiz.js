@@ -38,12 +38,14 @@ export default function RandomQuiz() {
 
   const { topic } = useParams();
   console.log(topic);
-  
-  const [singularChoice, setSingularChoice] = useState(false);
 
+  const [singularChoice, setSingularChoice] = useState(false);
 
   const API_URL = "https://simpleroger.pythonanywhere.com/quiz/r/" + topic;
 
+  const handleSelection = (e) => {
+    setAnswer({ ...answer, [e.target.value]: e.target.checked });
+  };
   console.log(API_URL);
   console.log(ConnectApi(API_URL));
   const { data } = ConnectApi(API_URL);
@@ -68,6 +70,7 @@ export default function RandomQuiz() {
 
   const handleCheckboxSelection = (e) => {
     setAnswer({ ...answer, [e.target.value]: e.target.checked });
+    console.log(answer);
   };
 
   const handleRadioSelection = (e) => {
@@ -161,19 +164,23 @@ export default function RandomQuiz() {
       <Container component="main" maxWidth="xs">
         {data.map(({ title, answer }, i) => (
           <div key={i}>
-            <Typography component="h1" varient="h5">
+            <Typography component="h1" variant="h5">
               {title}
             </Typography>
-            <RadioGroup value={selectedValue} onChange={handleRadioSelection}>
-              {answer.map(({ answer_text, id }) => (
+            {answer.map(({ answer_text, id }) => (
+              <RadioGroup>
                 <FormControlLabel
-                  key={id}
-                  value={id}
-                  control={<Radio color="primary" />}
+                  control={
+                    <Checkbox
+                      value={id}
+                      color="primary"
+                      onChange={handleSelection}
+                    />
+                  }
                   label={answer_text}
                 />
-              ))}
-            </RadioGroup>
+              </RadioGroup>
+            ))}
             <Button
               type="submit"
               fullWidth
